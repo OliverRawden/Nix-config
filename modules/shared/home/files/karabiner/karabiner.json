@@ -1,0 +1,56 @@
+{
+  "profiles": [
+    {
+      "name": "Default",
+      "selected": true,
+      "virtual_hid_keyboard": {
+        "keyboard_type_v2": "iso"
+      },
+      "complex_modifications": {
+        "parameters": {
+          "basic.to_if_alone_timeout_milliseconds": 200
+        },
+        "rules": [
+          {
+            "description": "Caps Lock is Escape when tapped and Hyper when held",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": ["left_command", "left_control", "left_option"]
+                  }
+                ],
+                "to_if_alone": [{ "key_code": "escape" }],
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 200
+                }
+              }
+            ]
+          },
+          {
+            "description": "Command-Space opens Raycast",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": ["command"],
+                    "optional": ["caps_lock"]
+                  }
+                },
+                "to": [{ "shell_command": "open -a Raycast" }]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
