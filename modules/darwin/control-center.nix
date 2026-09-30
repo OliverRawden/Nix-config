@@ -48,9 +48,10 @@ in {
 
     cc_group="/Users/${username}/Library/Group Containers/group.com.apple.controlcenter/Library/Preferences/group.com.apple.controlcenter"
     mkdir -p "$(dirname "$cc_group")"
-    ${asUser} defaults write "$cc_group" showTimeMachine -bool true
-    ${asUser} defaults write "$cc_group" showVPN -bool false
-    ${asUser} defaults write "$cc_group" showWeather -bool false
+    # macOS 27 denies this write and does not prompt. Do not abort activation.
+    ${asUser} defaults write "$cc_group" showTimeMachine -bool false || true
+    ${asUser} defaults write "$cc_group" showVPN -bool false || true
+    ${asUser} defaults write "$cc_group" showWeather -bool false || true
 
     killall -qu ${username} ControlCenter 2>/dev/null || true
     killall -qu ${username} MenuBarAgent 2>/dev/null || true

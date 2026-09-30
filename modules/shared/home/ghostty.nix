@@ -11,8 +11,10 @@ let
     [ mod macos ]
     (builtins.readFile ./files/ghostty/config);
 in {
-  xdg.configFile."ghostty/config".text = ghosttyConfig;
+  # Ghostty 1.3 reads config.ghostty. The legacy name "config" is still
+  # loaded first when it exists, so only the new name is installed.
+  xdg.configFile."ghostty/config.ghostty".text = ghosttyConfig;
 
-  home.file."Library/Application Support/com.mitchellh.ghostty/config" =
+  home.file."Library/Application Support/com.mitchellh.ghostty/config.ghostty" =
     lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ghosttyConfig; };
 }

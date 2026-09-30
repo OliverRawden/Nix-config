@@ -231,16 +231,13 @@
         MenuItemHidden = false;
       };
 
-      # Time Machine is also toggled via group.com.apple.controlcenter (see control-center.nix).
+      # Time Machine stays out of the menu bar. VPN stays hidden.
       "com.apple.systemuiserver" = {
-        "NSStatusItem Visible com.apple.menuextra.TimeMachine" = true;
-        "NSStatusItem VisibleCC com.apple.menuextra.TimeMachine" = true;
+        "NSStatusItem Visible com.apple.menuextra.TimeMachine" = false;
+        "NSStatusItem VisibleCC com.apple.menuextra.TimeMachine" = false;
         "NSStatusItem Visible com.apple.menuextra.vpn" = false;
         "NSStatusItem VisibleCC com.apple.menuextra.vpn" = false;
-        "NSStatusItem Preferred Position com.apple.menuextra.TimeMachine" = 400;
-        menuExtras = [
-          "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
-        ];
+        menuExtras = [ ];
       };
     };
   };
